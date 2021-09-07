@@ -1,0 +1,99 @@
+ <html>
+ <head>
+ <title>Timepass</title>
+ <link href="pf.css" rel="stylesheet">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Allison&display=swap" rel="stylesheet"> 
+</head>
+ <body>
+ <div id="nav">
+ <div>
+  <a href="index.html"><div class="tab">H</div></a>
+   <a href="up.html"><div class="tab">U</div></a>
+   <a href="delete.html"><div class="tab">D</div></a>
+
+ </div>
+ </div>
+ <div id="heading">
+ Time passS
+ </div>
+ <div id="table" style="width:80%;float:right;margin-top:12vh; font-family: 'Allison', cursive;">
+ <h1>Delete photo:</h1>
+ <div id="tb" style="">
+ </div>
+ </div>
+ </bodY> 
+ <script type="module">
+   // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js";
+  import { getStorage,ref,uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-storage.js";
+  //import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-storage.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+  // Your web app's Firebase configuration
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-firestore.js"
+  import { collection, addDoc,getDocs, query, where,orderBy,doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-firestore.js"; 
+
+  const click=(e)=>{
+  var r = confirm("Delete this image?");
+  if(r===true)
+  e.target.style.display="none";}
+  const firebaseConfig = {
+    apiKey: "AIzaSyCjOTervLOvLurrtV-RkBgKb3pxGeen49g",
+    authDomain: "photo-74f46.firebaseapp.com",
+    projectId: "photo-74f46",
+    storageBucket: "photo-74f46.appspot.com",
+    messagingSenderId: "540278081934",
+    appId: "1:540278081934:web:2507424d9d530af7e5bcdf"
+  };
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const storage=getStorage(app,"gs://photo-74f46.appspot.com")
+  const listRef = ref(storage);
+  const db = getFirestore();
+  const photoRef = collection(db, "photos");
+
+  const q = query(photoRef,orderBy("index","desc"));
+  getDocs(q).then(result=>{
+  console.log("reuslt")
+   let table=document.getElementById('tb');
+   //table.innerHtml="";
+   let newHtml=``;
+   if(result.size===0){
+   console.log("nothing")
+   newHtml=`<h1 class="nodata">no photo added yet!</h1>`;
+   }
+   result.forEach(doc=>{
+   newHtml+=`<img style="width:20%" id=${doc.data().index} class="del" src=${doc.data().url}>`
+   })
+   table.innerHTML=newHtml; 
+   result.forEach(Doc=>{
+   document.getElementById(Doc.data().index).addEventListener("click",(e)=>{
+   var r = confirm("Delete this image?"+Doc.data().name);
+   if(r===true)
+   {
+   // Create a reference to the file to delete
+  const desertRef = ref(storage,"images/"+Doc.data().name);
+
+  // Delete the file
+  deleteObject(desertRef).then(() => {
+    // File deleted successfully
+   deleteDoc(doc(db, "photos", Doc.id)).then(()=>{
+   e.target.style.display="none";
+   }).catch(e=>alert("failed"))
+   }).catch((error) => {
+    alert("failed")
+    // Uh-oh, an error occurred!
+  });
+   }
+   
+   });
+   
+   }
+   
+   )
+   
+});
+ </script>
+ </html>

@@ -1,0 +1,77 @@
+ <html>
+ <head>
+  <title>Timepass</title>
+ <link href="pf.css" rel="stylesheet">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Allison&display=swap" rel="stylesheet"> 
+</head>
+ <bodY>
+ <div id="nav">
+ <div>
+  <a href="index.html"><div class="tab">H</div></a>
+   <a href="up.html"><div class="tab">U</div></a>
+   <a href="delete.html"><div class="tab">D</div></a>
+ </div>
+ </div>
+ <div id="heading">
+ Time pass
+ </div>
+ <div id="table">
+ <table id="tb">
+  <tr><td class="loading">
+   <div class="loader"></div> 
+  </td></tr>
+ </table>
+ </div>
+ </bodY> 
+ <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-firestore.js"
+  import { collection, addDoc,getDocs, query, where,orderBy } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-firestore.js"; 
+
+  //import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-storage.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCjOTervLOvLurrtV-RkBgKb3pxGeen49g",
+    authDomain: "photo-74f46.firebaseapp.com",
+    projectId: "photo-74f46",
+    storageBucket: "photo-74f46.appspot.com",
+    messagingSenderId: "540278081934",
+    appId: "1:540278081934:web:2507424d9d530af7e5bcdf"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore();
+  const photoRef = collection(db, "photos");
+
+   const q = query(photoRef,orderBy("index","desc"));
+   getDocs(q).then(result=>{
+  console.log("reuslt")
+   let table=document.getElementById('tb');
+   var newHtml=``;
+   let i=0;
+   if(result.size===0){
+   console.log("nothing")
+   newHtml=`<tr><th class="nodata">no photo added yet!</th></tr>`;
+   }
+   result.forEach(doc=>{
+   if(i%2===0){
+   newHtml+=`<tr><td><a style="margin:0 auto;" href="${doc.data().url}" target="_blank"><img src="${doc.data().url}"></a></td><td></td></tr>`
+   }
+   else{
+   newHtml+=`<tr><td></td><td><a style="margin:0 auto;" href="${doc.data().url}" target="_blank"><img src="${doc.data().url}"></a></td></tr>`
+   }
+   i++;
+   })
+   table.innerHTML=newHtml;
+});
+
+  
+ </script>
+ </html>
