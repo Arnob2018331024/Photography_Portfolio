@@ -1,0 +1,158 @@
+body {
+  padding: 8px;
+}
+#title-bar {
+  padding: 16px;
+  background-color: #cfcfcf;
+  min-height: 25%;
+  border-radius: 10px;
+  margin-bottom: 24px;
+}
+#icon {
+  width: 104px;
+}
+#title {
+  min-width: 20%;
+}
+#name {
+  font-size: x-large;
+}
+#nav {
+  padding: 16px;
+  font-size: large;
+}
+.link {
+  padding: 8px;
+}
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+#profilepic {
+  width: 25vh;
+  height: 25vh;
+  border-radius: 100px;
+}
+#username {
+  padding-right: 16px;
+  font-size: xx-large;
+}
+#user {
+  padding-right: 16px;
+}
+td {
+  width: 50%;
+}
+
+@media screen and (max-width: 1600px) {
+  #photos {
+    column-count: 3;
+    padding: 0px;
+  }
+  #title-bar {
+    padding: 16px;
+    background-color: #cfcfcf;
+    min-height: 25%;
+    border-radius: 10px;
+    margin-bottom: 24px;
+  }
+  #icon {
+    width: 104px;
+  }
+  #title {
+    min-width: 20%;
+  }
+  #name {
+    font-size: x-large;
+  }
+  #nav {
+    padding: 16px;
+    font-size: large;
+  }
+  .link {
+    padding: 8px;
+  }
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
+  #profilepic {
+    width: 25vh;
+    height: 25vh;
+    border-radius: 100px;
+  }
+  #username {
+    padding-right: 16px;
+    font-size: xx-large;
+  }
+  #user {
+    padding-right: 16px;
+  }
+  td {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 768px) {
+  #title-bar {
+    padding: 8px;
+    background-color: #cfcfcf;
+    min-height: 25%;
+    border-radius: 10px;
+    margin-bottom: 24px;
+  }
+  #icon {
+    width: 64px;
+  }
+  #title {
+    min-width: 20%;
+  }
+  #name {
+    font-size: large;
+  }
+  #nav {
+    padding: 8px;
+    font-size: small;
+  }
+  .link {
+    padding: 8px;
+  }
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
+  #profilepic {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+  }
+  #username {
+    padding-right: 8px;
+    font-size: large;
+  }
+  #user {
+    padding-right: 16px;
+  }
+  td {
+    width: 50%;
+  }
+  #photos {
+    column-count: 2;
+    padding: 0px;
+  }
+}
+@media screen and (max-width: 425px) {
+  #photos {
+    column-count: 1;
+    padding: 0px;
+  }
+}
+.column {
+  max-width: 100%;
+  max-height: 100%;
+  padding-bottom: 24px;
+}
+.column:hover {
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.5s;
+}
