@@ -5,3 +5,4 @@ Tried to develop a photographic portfolio where a photographer can showcase his 
 - CSS
 - JS
 - Firebase
+- Firestore
